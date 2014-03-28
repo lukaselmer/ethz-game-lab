@@ -63,7 +63,8 @@ public class Tower : MonoBehaviour {
 		CalculateAimError ();
 
 		foreach (var theMouzzlePos in muzzlePositions) {
-			Instantiate (myProjectile, theMouzzlePos.position, theMouzzlePos.rotation);
+			var projectile = (GameObject)Instantiate (myProjectile, theMouzzlePos.position, theMouzzlePos.rotation);
+			projectile.transform.parent = gameObject.transform;		
 		}
 
 	}
