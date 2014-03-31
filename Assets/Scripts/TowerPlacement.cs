@@ -4,6 +4,7 @@ using System.Collections;
 public class TowerPlacement : MonoBehaviour {
 
 	public GameObject towerPrefab;
+	public GameObject towerBasePrefab;
 	public Transform towerParent;
 
 	public LayerMask terrainLayer;
@@ -18,7 +19,8 @@ public class TowerPlacement : MonoBehaviour {
 		if (Physics.Raycast (ray, out hit, 1000, terrainLayer)) {
 			
 			// check if allready towers are near mouse hitpoint
-			var towersNearPoint = Physics.OverlapSphere (hit.point, 1.0f/2.0f, towerBaseLayer);
+			var baseWidth = towerBasePrefab.collider.bounds.size.x;
+			var towersNearPoint = Physics.OverlapSphere (hit.point, baseWidth/2, towerBaseLayer);
 			if (towersNearPoint.Length == 0) {
 				var towerObject = (GameObject)Instantiate (towerPrefab, hit.point, Quaternion.identity);	
 				towerObject.transform.parent = towerParent;
