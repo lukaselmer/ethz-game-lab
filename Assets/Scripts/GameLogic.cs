@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Game;
 
-public class GameLogic : MonoBehaviour
-{
+public class GameLogic : MonoBehaviour {
 	public float PlayTime{ get; private set; }
 
 	public int EnemiesSurvived { get; private set; }
@@ -11,69 +11,48 @@ public class GameLogic : MonoBehaviour
 
 	// Checkpoints
 	public Checkpoint[] checkpoints;
+	private Checkpoint[] interpolatedCheckpoints;
 
-	public Checkpoint endCheckpoint { get { return checkpoints [checkpoints.Length - 1]; } }
+	public Checkpoint endCheckpoint { get { return interpolatedCheckpoints [interpolatedCheckpoints.Length - 1]; } }
 
-	void Start ()
-	{
-		var t = Terrain.activeTerrain;
-		var d = t.terrainData;
-		var map = new float[d.alphamapWidth, d.alphamapHeight, 2];
-
-		var xmin = d.alphamapWidth / 2;
-		var ymin = d.alphamapHeight / 2;
-		var delta = 50;
-
-		for (var x = 0; x < d.alphamapWidth; ++x) {
-			for (var y = 0; y < d.alphamapHeight; ++y) {
-				if (x > xmin - delta && y > ymin - delta && x < xmin + delta && y < ymin + delta) {
-					map [x, y, 0] = 0f;
-					map [x, y, 1] = 1f;
-				} else {
-					map [x, y, 0] = 1f;
-					map [x, y, 1] = 0f;
-				}
-			}
-		}
-		
-		t.terrainData.SetAlphamaps (0, 0, map);
+	void Start () {
+		interpolatedCheckpoints = new Maze(gameObject).InterpolateCheckpoints (checkpoints, 4);
+		new PathPainter (interpolatedCheckpoints, Terrain.activeTerrain).PaintPath ();
 	}
 
-	void Update ()
-	{
+	void Update () {
 		PlayTime += Time.deltaTime;
 	}
 
-	private int IndexOfCheckpoint (Checkpoint checkpoint)
-	{
-		for (int i = 0; i < checkpoints.Length; ++i) {
-			if (checkpoints [i] == checkpoint) {
+	private int IndexOfCheckpoint (Checkpoint checkpoint) {
+		if (interpolatedCheckpoints == null)
+			return 0;
+
+		for (int i = 0; i < interpolatedCheckpoints.Length; ++i) {
+			if (interpolatedCheckpoints [i] == checkpoint) {
 				return i;
 			}
 		}
 		return -1;
 	}
 
-	public Checkpoint NextCheckpoint (Checkpoint currentCheckpoint)
-	{
+	public Checkpoint NextCheckpoint (Checkpoint currentCheckpoint) {
 		int index = IndexOfCheckpoint (currentCheckpoint);
 
 		if (index == -1)
-			return checkpoints [0];
-		else if (index < checkpoints.Length - 1)
-			return checkpoints [index + 1];
+			return interpolatedCheckpoints [0];
+		else if (index < interpolatedCheckpoints.Length - 1)
+			return interpolatedCheckpoints [index + 1];
 
 		// This should never happen!
 		return endCheckpoint;
 	}
 
-	public void Survived (Enemy enemy)
-	{
+	public void Survived (Enemy enemy) {
 		EnemiesSurvived += 1;
 	}
 
-	public void Killed (Enemy enemy)
-	{
+	public void Killed (Enemy enemy) {
 		EnemiesKilled += 1;
 	}
 }

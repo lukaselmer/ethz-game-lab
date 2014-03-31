@@ -11,15 +11,15 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		nextCheckpoint = game.NextCheckpoint(nextCheckpoint);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(nextCheckpoint == null) nextCheckpoint = game.NextCheckpoint(nextCheckpoint);
 		if(nextCheckpoint == null) return;
 		if(gameObject == null) return;
 
-		var checkpointPosition = nextCheckpoint.transform.position;
+		var checkpointPosition = nextCheckpoint.Position;
 		var myPosition = transform.position;
 
 		var directionTowardsEnemy = checkpointPosition - myPosition;
