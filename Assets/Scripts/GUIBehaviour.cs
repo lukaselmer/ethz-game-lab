@@ -4,10 +4,9 @@ using System.Collections;
 public class GUIBehaviour : MonoBehaviour
 {	
 	public GameLogic gameLogic;
-	public LayerMask terrainLayer;
-	public GameObject tower;
 	public GUIText guiPlayTime;
-	public Transform towerParent;
+	public TowerPlacement towerPlacement;
+
 	private bool placementMode = false;
 
 	void Update ()
@@ -15,14 +14,9 @@ public class GUIBehaviour : MonoBehaviour
 		guiPlayTime.text = string.Format ("Enemies killed: {0}, Enemies survived: {1}, Play Time: {2:F0}", 
 		               gameLogic.EnemiesKilled, gameLogic.EnemiesSurvived, gameLogic.PlayTime);
 
-		if (placementMode) {
-			if (Input.GetMouseButton (0)) {
-
-				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-				RaycastHit hit;
-				if (Physics.Raycast (ray, out hit, 1000, terrainLayer)) {
-					var towerObject = (GameObject)Instantiate (tower, hit.point, Quaternion.identity);	
-					towerObject.transform.parent = towerParent;
+		if (Input.GetMouseButton (0)) {	
+			if (placementMode) {
+				if (towerPlacement.placeTower(Input.mousePosition)) {
 					placementMode = false;
 				}
 			}
