@@ -336,12 +336,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326e9b13446c548a28263153366ec951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myProjectile: {fileID: 100000, guid: 48e440a0431204c7d90ba7bce55b7686, type: 2}
+  projectilePrefab: {fileID: 100000, guid: 48e440a0431204c7d90ba7bce55b7686, type: 2}
   reloadTime: 1
   turnSpeed: 5
   firePauseTime: .25
-  errorAmount: .00100000005
-  myTarget: {fileID: 0}
   muzzlePositions:
   - {fileID: 400010}
   - {fileID: 400004}
