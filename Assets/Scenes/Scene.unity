@@ -826,12 +826,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a207e19efa3d84435b3cd82b8f12590b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 293780397}
-  checkpoint1: {fileID: 216404713}
-  checkpoint2: {fileID: 1440591471}
-  checkpoint3: {fileID: 1762715404}
-  checkpoint4: {fileID: 977459434}
-  end: {fileID: 481584178}
+  checkpoints:
+  - {fileID: 293780397}
+  - {fileID: 216404713}
+  - {fileID: 1440591471}
+  - {fileID: 1762715404}
+  - {fileID: 977459434}
+  - {fileID: 481584178}
 --- !u!114 &766406870
 MonoBehaviour:
   m_ObjectHideFlags: 0

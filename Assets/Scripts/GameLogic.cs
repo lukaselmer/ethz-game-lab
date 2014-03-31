@@ -10,35 +10,33 @@ public class GameLogic : MonoBehaviour
 	public int EnemiesKilled { get; private set; }
 
 	// Checkpoints
-	public Checkpoint start;
-	public Checkpoint checkpoint1;
-	public Checkpoint checkpoint2;
-	public Checkpoint checkpoint3;
-	public Checkpoint checkpoint4;
-	public Checkpoint end;
+	public Checkpoint[] checkpoints;
+	public Checkpoint endCheckpoint { get { return checkpoints [checkpoints.Length - 1]; } } 
 
 	void Update ()
 	{
 		PlayTime += Time.deltaTime;
 	}
 
+	private int IndexOfCheckpoint (Checkpoint checkpoint) {
+		for (int i = 0; i < checkpoints.Length; ++i) {
+			if (checkpoints[i] == checkpoint) {
+				return i;
+			}
+		}
+		return -1;
+	}
 	public Checkpoint NextCheckpoint (Checkpoint currentCheckpoint)
 	{
-		if (currentCheckpoint == null)
-			return start;
-		if (currentCheckpoint == start)
-			return checkpoint1;
-		if (currentCheckpoint == checkpoint1)
-			return checkpoint2;
-		if (currentCheckpoint == checkpoint2)
-			return checkpoint3;
-		if (currentCheckpoint == checkpoint3)
-			return checkpoint4;
-		if (currentCheckpoint == checkpoint4)
-			return end;
+		int index = IndexOfCheckpoint (currentCheckpoint);
+
+		if (index == -1)
+			return checkpoints[0];
+		else if (index < checkpoints.Length-1)
+			return checkpoints[index+1];
 
 		// This should never happen!
-		return end;
+		return endCheckpoint;
 	}
 
 	public void Survived (Enemy enemy)

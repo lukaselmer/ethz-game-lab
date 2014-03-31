@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour {
 
 		var delta = 0.25;
 		if(movementTowardsEnemy.magnitude < delta){
-			if(game.end == nextCheckpoint){
+			if(game.endCheckpoint == nextCheckpoint){
 				game.Survived(this);
 				Destroy(gameObject);
 				return;
