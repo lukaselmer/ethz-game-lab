@@ -1,25 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GUIBehaviour : MonoBehaviour {
-	
+public class GUIBehaviour : MonoBehaviour
+{	
 	public GameLogic gameLogic;
 	public LayerMask terrainLayer;
 	public GameObject tower;
 	public GUIText guiPlayTime;
 	public Transform towerParent;
-
 	private bool placementMode = false;
 
-	void Update () {
-		guiPlayTime.text = "Play Time: " + gameLogic.PlayTime;
+	void Update ()
+	{
+		guiPlayTime.text = string.Format ("Enemies killed: {0}, Enemies survived: {1}, Play Time: {2:F0}", 
+		               gameLogic.EnemiesKilled, gameLogic.EnemiesSurvived, gameLogic.PlayTime);
 
 		if (placementMode) {
-			if (Input.GetMouseButton(0)) {
+			if (Input.GetMouseButton (0)) {
 
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit;
-				if (Physics.Raycast(ray, out hit, 1000, terrainLayer)) {
+				if (Physics.Raycast (ray, out hit, 1000, terrainLayer)) {
 					var towerObject = (GameObject)Instantiate (tower, hit.point, Quaternion.identity);	
 					towerObject.transform.parent = towerParent;
 					placementMode = false;
@@ -27,10 +28,10 @@ public class GUIBehaviour : MonoBehaviour {
 			}
 		}
 	}
-
 	
-	void OnGUI () {
-		if (GUI.Button (new Rect (10, Screen.height-110, 100, 100), "Tower")) {
+	void OnGUI ()
+	{
+		if (GUI.Button (new Rect (10, Screen.height - 110, 100, 100), "Tower")) {
 			placementMode = true;
 		}
 	}

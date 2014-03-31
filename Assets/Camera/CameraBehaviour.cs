@@ -11,6 +11,5 @@ public class CameraBehaviour : MonoBehaviour {
 		{
 			gameObject.transform.Translate(new Vector3(xAxisValue, 0, yAxisValue));
 		}
-
 	}
 }

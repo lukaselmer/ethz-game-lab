@@ -2,17 +2,42 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-
+	
 	public double health = 50;
+	public GameLogic game;
+	public float speed = 2.5f;
+	
+	private Checkpoint nextCheckpoint;
 
 	// Use this for initialization
 	void Start () {
-	
+		nextCheckpoint = game.NextCheckpoint(nextCheckpoint);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(nextCheckpoint == null) return;
+		if(gameObject == null) return;
+
+		var checkpointPosition = nextCheckpoint.transform.position;
+		var myPosition = transform.position;
+
+		var directionTowardsEnemy = checkpointPosition - myPosition;
+		var movementTowardsEnemy = new Vector3(directionTowardsEnemy.x, 0, directionTowardsEnemy.z);
+
+		var delta = 0.25;
+		if(movementTowardsEnemy.magnitude < delta){
+			if(game.end == nextCheckpoint){
+				game.Survived(this);
+				Destroy(gameObject);
+				return;
+			}
+			nextCheckpoint = game.NextCheckpoint(nextCheckpoint);
+			return;
+		}
+
+		var movement = speed * Time.deltaTime * movementTowardsEnemy.normalized;
+		gameObject.transform.Translate(movement);
 	}
 	
 	void OnTriggerEnter (Collider other) {
@@ -25,6 +50,7 @@ public class Enemy : MonoBehaviour {
 			Destroy(other.gameObject);
 
 			if (health <= 0) {
+				game.Killed(this);
 				Destroy(gameObject);
 			}
 		}
