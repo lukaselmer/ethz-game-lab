@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour {
 		var myPosition = transform.position;
 
 		var directionTowardsEnemy = checkpointPosition - myPosition;
-		var movementTowardsEnemy = new Vector3(directionTowardsEnemy.x, 0, directionTowardsEnemy.z);
+		var movementTowardsEnemy = directionTowardsEnemy; //new Vector3(directionTowardsEnemy.x, 0, directionTowardsEnemy.z);
 
 		var delta = 0.25;
 		if(movementTowardsEnemy.magnitude < delta){
