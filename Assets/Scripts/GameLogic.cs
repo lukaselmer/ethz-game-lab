@@ -8,16 +8,22 @@ public class GameLogic : MonoBehaviour {
 	public int EnemiesSurvived { get; private set; }
 
 	public int EnemiesKilled { get; private set; }
+	
+	public GameObject enemyPrefab;
 
 	// Checkpoints
 	public Checkpoint[] checkpoints;
 	private Checkpoint[] interpolatedCheckpoints;
 
-	public Checkpoint endCheckpoint { get { return interpolatedCheckpoints [interpolatedCheckpoints.Length - 1]; } }
+	public Checkpoint EndCheckpoint { get { return interpolatedCheckpoints [interpolatedCheckpoints.Length - 1]; } }
+	public Checkpoint StartCheckpoint { get { return interpolatedCheckpoints [0]; } }
 
 	void Start () {
 		interpolatedCheckpoints = new Maze(gameObject).InterpolateCheckpoints (checkpoints, 4);
 		new PathPainter (interpolatedCheckpoints, Terrain.activeTerrain).PaintPath ();
+
+		Wave w = new Wave(this, 20, enemyPrefab, StartCheckpoint);
+		w.Start();
 	}
 
 	void Update () {
@@ -45,7 +51,7 @@ public class GameLogic : MonoBehaviour {
 			return interpolatedCheckpoints [index + 1];
 
 		// This should never happen!
-		return endCheckpoint;
+		return EndCheckpoint;
 	}
 
 	public void Survived (Enemy enemy) {

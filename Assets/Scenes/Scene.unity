@@ -591,10 +591,10 @@ GUIText:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
   m_FontSize: 15
-  m_FontStyle: 0
+  m_FontStyle: 1
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!4 &471448001
@@ -1282,6 +1282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a207e19efa3d84435b3cd82b8f12590b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 100000, guid: ea1436604b45f4b32bdf04d364899fc0, type: 2}
   checkpoints:
   - {fileID: 293780397}
   - {fileID: 216404713}

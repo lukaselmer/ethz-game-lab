@@ -6,6 +6,11 @@ public class Enemy : MonoBehaviour {
 	public double health = 50;
 	public GameLogic game;
 	public float speed = 2.5f;
+
+	public float SleepFor {
+		get;
+		set;
+	}
 	
 	private Checkpoint nextCheckpoint;
 
@@ -15,6 +20,10 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(SleepFor > 0){
+			SleepFor -= Time.deltaTime;
+			return;
+		}
 		if(nextCheckpoint == null) nextCheckpoint = game.NextCheckpoint(nextCheckpoint);
 		if(nextCheckpoint == null) return;
 		if(gameObject == null) return;
@@ -27,7 +36,7 @@ public class Enemy : MonoBehaviour {
 
 		var delta = 0.25;
 		if(movementTowardsEnemy.magnitude < delta){
-			if(game.endCheckpoint == nextCheckpoint){
+			if(game.EndCheckpoint == nextCheckpoint){
 				game.Survived(this);
 				Destroy(gameObject);
 				return;
