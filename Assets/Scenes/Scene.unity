@@ -3250,6 +3250,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hud: {fileID: 2123182353}
   towerPlacement: {fileID: 1854695032}
+  towerBaseLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  highlightMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  defaultMaterial: {fileID: 2100000, guid: ad98688314c7d4658ac504d9dacd0e7e, type: 2}
 --- !u!1 &1835878184
 GameObject:
   m_ObjectHideFlags: 0
