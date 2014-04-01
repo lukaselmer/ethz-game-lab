@@ -68,8 +68,6 @@ namespace Game {
 		
 		public void PaintPath () {
 			var map = CreateTerrainMap ();
-			var xmin = terrainData.alphamapWidth / 2;
-			var ymin = terrainData.alphamapHeight / 2;
 
 			foreach (var checkpoint in Checkpoints) {
 				PaintCheckpoint (map, new Vector2 (checkpoint.Position.x, checkpoint.Position.z));

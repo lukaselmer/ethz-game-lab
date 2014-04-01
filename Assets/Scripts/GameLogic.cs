@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using Game;
+using System;
 
 public class GameLogic : MonoBehaviour {
 	public float PlayTime{ get; private set; }
@@ -18,16 +19,19 @@ public class GameLogic : MonoBehaviour {
 	public Checkpoint EndCheckpoint { get { return interpolatedCheckpoints [interpolatedCheckpoints.Length - 1]; } }
 	public Checkpoint StartCheckpoint { get { return interpolatedCheckpoints [0]; } }
 
+	private WaveManager waveManager;
+
 	void Start () {
 		interpolatedCheckpoints = new Maze(gameObject).InterpolateCheckpoints (checkpoints, 4);
 		new PathPainter (interpolatedCheckpoints, Terrain.activeTerrain).PaintPath ();
-
-		Wave w = new Wave(this, 20, enemyPrefab, StartCheckpoint);
-		w.Start();
+		
+		waveManager = new WaveManager(this, enemyPrefab, StartCheckpoint);
+		waveManager.StartWaves();
 	}
 
 	void Update () {
 		PlayTime += Time.deltaTime;
+		waveManager.Update();
 	}
 
 	private int IndexOfCheckpoint (Checkpoint checkpoint) {
@@ -52,6 +56,12 @@ public class GameLogic : MonoBehaviour {
 
 		// This should never happen!
 		return EndCheckpoint;
+	}
+
+	public void Finished (Enemy enemy) {
+		if(enemy.Dead) Killed (enemy);
+		else if(enemy.Survived) Survived(enemy);
+		else throw new ApplicationException("Invalid enemy state: " + enemy.State);
 	}
 
 	public void Survived (Enemy enemy) {
