@@ -12,8 +12,8 @@ public class HUD : MonoBehaviour
 		                                  GameLogic.I.EnemiesKilled, GameLogic.I.EnemiesSurvived, GameLogic.I.PlayTime);
 
 		
-		if (InputHandler.Instance.SelectedTower != null) {
-			guiTower.text = string.Format ("Size: {0:F1}", InputHandler.Instance.SelectedTower.Size);
+		if (InputHandler.I.SelectedTower != null) {
+			guiTower.text = string.Format ("Size: {0:F1}", InputHandler.I.SelectedTower.Size);
 		} else {
 			guiTower.text = "";
 		}
@@ -21,7 +21,7 @@ public class HUD : MonoBehaviour
 	
 	void OnGUI ()
 	{
-		if (InputHandler.Instance.SelectedTower != null) {
+		if (InputHandler.I.SelectedTower != null) {
 			if (GUI.Button (new Rect (Screen.width-110, 30, 100, 30), TowerPlacement.Instance.PlacementMode ? "Placing..." : "Branch Tower")) {
 				TowerPlacement.Instance.PlacementMode = true;
 			}
