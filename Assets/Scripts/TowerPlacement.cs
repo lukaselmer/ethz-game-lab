@@ -18,7 +18,7 @@ public class TowerPlacement : MonoBehaviour {
 	}
 
 	public bool placeTower (Vector3 mousePosition, Tower originTower) {
-		if (originTower.Size < 2) {
+		if (originTower.Size < 1.5) {
 			return true;
 		}
 
@@ -27,6 +27,10 @@ public class TowerPlacement : MonoBehaviour {
 		// Get Mouse hit point on terrain
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit, 1000, terrainLayer)) {
+
+			if ((hit.point - originTower.transform.position).magnitude > originTower.Size * 5) {
+				return false;
+			}
 			
 			// check if allready towers are near mouse hitpoint
 			var towersNearPoint = Physics.OverlapSphere (hit.point, 1, towerLayer);
