@@ -11,6 +11,7 @@ public class GameLogic : MonoBehaviour {
 	public int EnemiesKilled { get; private set; }
 	
 	public GameObject enemyPrefab;
+	public Transform enemyParent;
 
 	// Checkpoints
 	public Checkpoint[] checkpoints;
@@ -25,7 +26,7 @@ public class GameLogic : MonoBehaviour {
 		interpolatedCheckpoints = new Maze(gameObject).InterpolateCheckpoints (checkpoints, 4);
 		new PathPainter (interpolatedCheckpoints, Terrain.activeTerrain).PaintPath ();
 		
-		waveManager = new WaveManager(this, enemyPrefab, StartCheckpoint);
+		waveManager = new WaveManager(this, enemyPrefab, StartCheckpoint, enemyParent);
 		waveManager.StartWaves();
 	}
 

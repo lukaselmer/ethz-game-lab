@@ -6,6 +6,7 @@ using System.Collections;
 
 class Wave {
 	GameObject enemyPrefab;
+	Transform enemyParent;
 	int amount;
 	GameLogic game;
 	Checkpoint start;
@@ -15,11 +16,12 @@ class Wave {
 		get{ return enemies.All ((el) => el.Finished);}
 	}
 
-	public Wave (GameLogic game, int amount, GameObject enemyPrefab, Checkpoint start) {
+	public Wave (GameLogic game, int amount, GameObject enemyPrefab, Checkpoint start, Transform enemyParent) {
 		this.game = game;
 		this.amount = amount;
 		this.enemyPrefab = enemyPrefab;
 		this.start = start;
+		this.enemyParent = enemyParent;
 	}
 
 	public void Start () {
@@ -28,6 +30,7 @@ class Wave {
 		for (var i = 0; i < amount; ++i) {
 			var enemyObject = (GameObject)GameObject.Instantiate (enemyPrefab, start.Position, Quaternion.identity);	
 			var enemy = enemyObject.GetComponent<Enemy> ();
+			enemy.transform.parent = enemyParent;
 			enemy.game = game;
 			enemy.speed = 4f;
 			enemy.health = 20f;

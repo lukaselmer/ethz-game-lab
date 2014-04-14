@@ -10,19 +10,21 @@ namespace Game {
 		Checkpoint start;
 
 		GameObject enemyPrefab;
+		Transform enemyParent;
 
 		private float wait = 0;
 
 		GameLogic game;
 
-		public WaveManager (GameLogic game, GameObject enemyPrefab, Checkpoint start) {
+		public WaveManager (GameLogic game, GameObject enemyPrefab, Checkpoint start, Transform enemyParent) {
 			this.game = game;
 			this.enemyPrefab = enemyPrefab;
 			this.start = start;
+			this.enemyParent = enemyParent;
 		}
 
 		public void StartWaves () {
-			currentWave = new Wave(game, 20, enemyPrefab, start);
+			currentWave = new Wave(game, 20, enemyPrefab, start, enemyParent);
 			currentWave.Start();
 		}
 
