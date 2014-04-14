@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputHandler : MonoBehaviour {
+public class InputHandler : Singleton<InputHandler> {
 
 	public HUD hud;
 	public TowerPlacement towerPlacement;
 
 	public LayerMask towerBaseLayer;
-	public Material highlightMaterial;
-	public Material defaultMaterial;
 
-	private GameObject selected;
+	public Tower SelectedTower { get; private set; }
+
 
 	// Update is called once per frame
 	void Update () {
@@ -28,20 +27,19 @@ public class InputHandler : MonoBehaviour {
 			} else {
 					
 				// reset color of selected element
-				if (selected) {
-					MeshRenderer rnd = selected.GetComponent<MeshRenderer>();
-					rnd.material = defaultMaterial;
+				if (SelectedTower) {
+					SelectedTower.SetSelection(false);
 				}
 				
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 				RaycastHit hit;
 				if (Physics.Raycast (ray, out hit, 1000, towerBaseLayer)) {
-					selected = hit.collider.gameObject;
-					MeshRenderer rnd = selected.GetComponent<MeshRenderer>();
-					rnd.material = highlightMaterial;
+					var selectedGameObject = hit.collider.gameObject.transform.parent;
+					SelectedTower = selectedGameObject.GetComponent<Tower>();
+					SelectedTower.SetSelection(true);
 				} else {
-					selected = null;
+					SelectedTower = null;
 				}
 			}
 
@@ -50,10 +48,9 @@ public class InputHandler : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Delete)) {
 
 			// remove Tower
-			if (selected) {
-				Destroy(selected.transform.parent.gameObject);
+			if (SelectedTower) {
+				Destroy(SelectedTower.transform.gameObject);
 			}
-		}
-	
+		}	
 	}
 }

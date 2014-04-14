@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
 	public float myRange = 10;
 	public float myDamage = 5;
 	public Transform target;
+	public Tower origin;
 	private float myDist;
 
 	// Update is called once per frame

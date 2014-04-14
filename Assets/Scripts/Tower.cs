@@ -11,67 +11,48 @@ public class Tower : MonoBehaviour
 	public float firePauseTime = 0.25f;
 	public Transform[] muzzlePositions;
 	public Transform turretBall;
-	private HashSet<GameObject> targets = new HashSet<GameObject> ();
-	private Transform currentTarget;
+	public GameObject selectionObject;
+
+	private TowerTargetController targetController;
+
 	private double nextFireTime;
 	private Quaternion desiredRotation;
+
+	private float size = 1.0f;
+	public float Size {
+		get {
+			return Mathf.Min (size, 3);
+		}
+		set {
+			size = value;
+		}
+	}
 
 	void Start ()
 	{
 		nextFireTime = Time.time + reloadTime * 0.5;
+		targetController = GetComponentInChildren<TowerTargetController> ();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		SetNextTarget ();
+		Size += Time.deltaTime * 0.01f;
+		transform.localScale = new Vector3 (Size, Size, Size);
 
-		if (currentTarget) {
-			CalculateAimPosition (currentTarget.position);
+		targetController.SetNextTarget ();
+
+		if (targetController.CurrentTarget) {
+			CalculateAimPosition (targetController.CurrentTarget.position);
 			turretBall.rotation = Quaternion.Lerp (turretBall.rotation, desiredRotation, Time.deltaTime * turnSpeed);
 		}
 		
 		if (Time.time >= nextFireTime) {
-			if (currentTarget) {
+			if (targetController.CurrentTarget) {
 				FireProjectile ();
-				SetNextTarget ();
+				targetController.SetNextTarget ();
 			}
 		}
-	}
-
-	void OnTriggerEnter (Collider other)
-	{
-		if (other.gameObject.tag == "Enemy") {
-			targets.Add (other.gameObject);
-		}
-	}
-
-	void OnTriggerExit (Collider other)
-	{
-		if (other.gameObject.transform == currentTarget) {
-			targets.Remove (other.gameObject);
-		}
-	}
-
-	void SetNextTarget ()
-	{
-		// remove destroyed targets, because they don't trigger OnTriggerExit
-		targets.RemoveWhere (i => i == null);
-
-		GameObject nextTarget = null;
-		double minHealth = double.MaxValue;
-		foreach (var enemyObject in targets) {
-			Enemy enemy = enemyObject.GetComponent<Enemy> ();
-			if (enemy.health < minHealth) {
-				nextTarget = enemyObject;
-				minHealth = enemy.health;
-			}
-		}
-
-		if (nextTarget != null && nextTarget.transform != currentTarget) 
-			nextFireTime = Time.time + reloadTime * 0.5;
-		
-		currentTarget = nextTarget ? nextTarget.transform : null;
 	}
 
 	void CalculateAimPosition (Vector3 targetPos)
@@ -89,7 +70,12 @@ public class Tower : MonoBehaviour
 			var projectileObj = (GameObject)Instantiate (projectilePrefab, mouzzlePosition.position, mouzzlePosition.rotation);
 			projectileObj.transform.parent = gameObject.transform;	
 			var projectile = projectileObj.GetComponent<Projectile> ();
-			projectile.target = currentTarget;
+			projectile.target = targetController.CurrentTarget;
+			projectile.origin = this;
 		}
+	}
+
+	public void SetSelection(bool selection) {
+		selectionObject.renderer.enabled = selection;
 	}
 }
