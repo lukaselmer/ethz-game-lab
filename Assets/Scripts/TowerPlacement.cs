@@ -8,6 +8,14 @@ public class TowerPlacement : MonoBehaviour {
 
 	public LayerMask terrainLayer;
 	public LayerMask towerLayer;
+	
+	public bool PlacementMode { get; set; }
+	
+	public static TowerPlacement Instance {
+		get {
+			return FindObjectOfType<TowerPlacement>();
+		}
+	}
 
 	public bool placeTower (Vector3 mousePosition) {
 

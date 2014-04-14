@@ -22,6 +22,13 @@ public class GameLogic : MonoBehaviour {
 
 	private WaveManager waveManager;
 
+	
+	public static GameLogic Instance {
+		get {
+			return FindObjectOfType<GameLogic>();
+		}
+	}
+
 	void Start () {
 		interpolatedCheckpoints = new Maze(gameObject).InterpolateCheckpoints (checkpoints, 4);
 		new PathPainter (interpolatedCheckpoints, Terrain.activeTerrain).PaintPath ();

@@ -3,16 +3,13 @@ using System.Collections;
 
 public class HUD : MonoBehaviour
 {	
-	public GameLogic gameLogic;
 	public GUIText guiPlayTime;
 	public GUIText guiTower;
-
-	public bool PlacementMode { get; set; }
 
 	void Update ()
 	{
 		guiPlayTime.text = string.Format ("Enemies killed: {0}, Enemies survived: {1}, Play Time: {2:F0}", 
-		               gameLogic.EnemiesKilled, gameLogic.EnemiesSurvived, gameLogic.PlayTime);
+		                                  GameLogic.Instance.EnemiesKilled, GameLogic.Instance.EnemiesSurvived, GameLogic.Instance.PlayTime);
 
 		
 		if (InputHandler.Instance.SelectedTower != null) {
@@ -22,8 +19,8 @@ public class HUD : MonoBehaviour
 	
 	void OnGUI ()
 	{
-		if (GUI.Button (new Rect (10, Screen.height - 110, 100, 100), PlacementMode ? "Placing..." : "Tower")) {
-			PlacementMode = true;
+		if (GUI.Button (new Rect (10, Screen.height - 110, 100, 100), TowerPlacement.Instance.PlacementMode ? "Placing..." : "Tower")) {
+			TowerPlacement.Instance.PlacementMode = true;
 		}
 
 	}

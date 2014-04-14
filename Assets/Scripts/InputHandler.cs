@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputHandler : Singleton<InputHandler> {
-
-	public HUD hud;
-	public TowerPlacement towerPlacement;
+public class InputHandler : MonoBehaviour {
 
 	public LayerMask towerBaseLayer;
-
 	public Tower SelectedTower { get; private set; }
-
+	
+	public static InputHandler Instance {
+		get {
+			return FindObjectOfType<InputHandler>();
+		}
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -18,9 +19,9 @@ public class InputHandler : Singleton<InputHandler> {
 		if (Input.GetMouseButton (0)) {	
 
 			// Tower placement
-			if (hud.PlacementMode) {
-				if (towerPlacement.placeTower(Input.mousePosition)) {
-					hud.PlacementMode = false;
+			if (TowerPlacement.Instance.PlacementMode) {
+				if (TowerPlacement.Instance.placeTower(Input.mousePosition)) {
+					TowerPlacement.Instance.PlacementMode = false;
 				}
 
 			// Tower selection
