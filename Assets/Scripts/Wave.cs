@@ -28,13 +28,16 @@ class Wave {
 		enemies = new List<Enemy> ();
 
 		for (var i = 0; i < amount; ++i) {
-			var enemyObject = (GameObject)GameObject.Instantiate (enemyPrefab, start.Position, Quaternion.identity);	
+			var enemy = ObjectFactory.CreateSmallEnemy(enemyParent, enemyPrefab, game, start.Position, 4f, 20f, i/2.0f);
+			enemies.Add(enemy);
+
+			/*var enemyObject = (GameObject)GameObject.Instantiate (enemyPrefab, start.Position, Quaternion.identity).GetComponent<Enemy> ();	
 			var enemy = enemyObject.GetComponent<Enemy> ();
 			enemy.transform.parent = enemyParent;
 			enemy.game = game;
 			enemy.speed = 4f;
 			enemy.health = 20f;
-			enemy.SleepFor = i/2.0f;
+			enemy.SleepFor = i/2.0f;*/
 		}
 		// TODO: use this instead of sleep for? yield return new WaitForSeconds(1);
 	}
