@@ -12,14 +12,14 @@ namespace Game {
 		GameObject enemyPrefab;
 		Transform enemyParent;
 
-		private float wait = 0;
+		//private float wait = 0;
 
 		GameLogic game;
 
-		public WaveManager (GameLogic game, GameObject enemyPrefab, Checkpoint start, Transform enemyParent) {
+		public WaveManager (GameLogic game, GameObject enemyPrefab, Maze maze, Transform enemyParent) {
 			this.game = game;
 			this.enemyPrefab = enemyPrefab;
-			this.start = start;
+			this.start = maze.StartCheckpoint;
 			this.enemyParent = enemyParent;
 		}
 

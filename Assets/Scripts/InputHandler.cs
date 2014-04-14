@@ -6,7 +6,7 @@ public class InputHandler : MonoBehaviour {
 	public LayerMask towerBaseLayer;
 	public Tower SelectedTower { get; private set; }
 	
-	public static InputHandler Instance {
+	public static InputHandler I {
 		get {
 			return FindObjectOfType<InputHandler>();
 		}

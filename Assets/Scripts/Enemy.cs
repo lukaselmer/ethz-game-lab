@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour {
 			state = EnemyState.Running;
 		}
 		if (nextCheckpoint == null)
-			nextCheckpoint = game.NextCheckpoint (nextCheckpoint);
+			nextCheckpoint = game.Maze.NextCheckpoint (nextCheckpoint);
 		if (nextCheckpoint == null)
 			return;
 		if (gameObject == null)
@@ -55,13 +55,13 @@ public class Enemy : MonoBehaviour {
 
 		var delta = 0.25;
 		if (movementTowardsEnemy.magnitude < delta) {
-			if (game.EndCheckpoint == nextCheckpoint) {
+			if (game.Maze.EndCheckpoint == nextCheckpoint) {
 				state = EnemyState.Survived;
 				game.Finished (this);
 				Destroy (gameObject);
 				return;
 			}
-			nextCheckpoint = game.NextCheckpoint (nextCheckpoint);
+			nextCheckpoint = game.Maze.NextCheckpoint (nextCheckpoint);
 			return;
 		}
 
