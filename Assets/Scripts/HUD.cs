@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class HUD : MonoBehaviour
@@ -9,7 +9,7 @@ public class HUD : MonoBehaviour
 	void Update ()
 	{
 		guiPlayTime.text = string.Format ("Enemies killed: {0}, Enemies survived: {1}, Play Time: {2:F0}", 
-		                                  GameLogic.Instance.EnemiesKilled, GameLogic.Instance.EnemiesSurvived, GameLogic.Instance.PlayTime);
+		                                  GameLogic.I.EnemiesKilled, GameLogic.I.EnemiesSurvived, GameLogic.I.PlayTime);
 
 		
 		if (InputHandler.Instance.SelectedTower != null) {
