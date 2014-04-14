@@ -20,30 +20,32 @@ public class InputHandler : MonoBehaviour {
 
 			// Tower placement
 			if (TowerPlacement.Instance.PlacementMode) {
-				if (TowerPlacement.Instance.placeTower(Input.mousePosition)) {
+				if (TowerPlacement.Instance.placeTower(Input.mousePosition, SelectedTower)) {
 					TowerPlacement.Instance.PlacementMode = false;
 				}
 
 			// Tower selection
 			} else {
-					
-				// reset color of selected element
-				if (SelectedTower) {
-					SelectedTower.SetSelection(false);
-				}
 				
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-
 				RaycastHit hit;
 				if (Physics.Raycast (ray, out hit, 1000, towerBaseLayer)) {
+
 					var selectedGameObject = hit.collider.gameObject.transform.parent;
-					SelectedTower = selectedGameObject.GetComponent<Tower>();
+					var newSelection = selectedGameObject.GetComponent<Tower>();
+
+					if (SelectedTower && newSelection != SelectedTower) {
+						SelectedTower.SetSelection(false);
+					}
+
+					SelectedTower = newSelection;
 					SelectedTower.SetSelection(true);
-				} else {
-					SelectedTower = null;
 				}
 			}
+		}
 
+		if (Input.GetMouseButton (1) && SelectedTower) {
+			SelectedTower = null;
 		}
 
 		if (Input.GetKeyDown(KeyCode.Delete)) {

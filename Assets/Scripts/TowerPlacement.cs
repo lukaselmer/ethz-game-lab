@@ -17,7 +17,10 @@ public class TowerPlacement : MonoBehaviour {
 		}
 	}
 
-	public bool placeTower (Vector3 mousePosition) {
+	public bool placeTower (Vector3 mousePosition, Tower originTower) {
+		if (originTower.Size < 2) {
+			return true;
+		}
 
 		Ray ray = Camera.main.ScreenPointToRay (mousePosition);
 		
@@ -28,9 +31,12 @@ public class TowerPlacement : MonoBehaviour {
 			// check if allready towers are near mouse hitpoint
 			var towersNearPoint = Physics.OverlapSphere (hit.point, 1, towerLayer);
 			if (towersNearPoint.Length == 0) {
-				var towerObject = (GameObject)Instantiate (towerPrefab, hit.point, Quaternion.identity);	
+				GameObject towerObject = (GameObject)Instantiate (towerPrefab, hit.point, Quaternion.identity);	
 				towerObject.transform.parent = towerParent;
 				towerObject.name = "Tower";
+
+				towerObject.GetComponent<Tower>().Size = originTower.Size/2;
+				originTower.Size = originTower.Size/2;
 				return true;
 			}
 		}

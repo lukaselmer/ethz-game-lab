@@ -14,14 +14,17 @@ public class HUD : MonoBehaviour
 		
 		if (InputHandler.Instance.SelectedTower != null) {
 			guiTower.text = string.Format ("Size: {0:F1}", InputHandler.Instance.SelectedTower.Size);
+		} else {
+			guiTower.text = "";
 		}
 	}
 	
 	void OnGUI ()
 	{
-		if (GUI.Button (new Rect (10, Screen.height - 110, 100, 100), TowerPlacement.Instance.PlacementMode ? "Placing..." : "Tower")) {
-			TowerPlacement.Instance.PlacementMode = true;
+		if (InputHandler.Instance.SelectedTower != null) {
+			if (GUI.Button (new Rect (Screen.width-110, 30, 100, 30), TowerPlacement.Instance.PlacementMode ? "Placing..." : "Branch Tower")) {
+				TowerPlacement.Instance.PlacementMode = true;
+			}
 		}
-
 	}
 }
