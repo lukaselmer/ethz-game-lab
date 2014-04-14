@@ -19,6 +19,7 @@ namespace Game {
 			this.gameObject = gameObject;
 			this.checkpoints = checkpoints;
 			this.interpolatedCheckpoints = CalculateInterpolateCheckpoints (checkpoints, 4);
+			new PathPainter (InterpolateCheckpoints (), Terrain.activeTerrain).PaintPath ();
 		}
 
 		public Checkpoint[] InterpolateCheckpoints () {

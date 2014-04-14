@@ -31,7 +31,6 @@ public class GameLogic : MonoBehaviour {
 
 	void Start () {
 		maze = new Maze(gameObject, checkpoints);
-		new PathPainter (maze.InterpolateCheckpoints (), Terrain.activeTerrain).PaintPath ();
 		
 		waveManager = new WaveManager(this, enemyPrefab, StartCheckpoint, enemyParent);
 		waveManager.StartWaves();
