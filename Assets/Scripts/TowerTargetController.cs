@@ -17,7 +17,7 @@ public class TowerTargetController : MonoBehaviour {
 	
 	void OnTriggerExit (Collider other)
 	{
-		if (other.gameObject.transform == CurrentTarget) {
+		if (other.gameObject.tag == "Enemy") {
 			targets.Remove (other.gameObject);
 		}
 	}
