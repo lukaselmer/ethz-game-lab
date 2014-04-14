@@ -12,7 +12,7 @@ namespace Game {
 		GameObject enemyPrefab;
 		Transform enemyParent;
 
-		private float wait = 0;
+		//private float wait = 0;
 
 		GameLogic game;
 
