@@ -7,6 +7,9 @@ public class TowerTargetController : MonoBehaviour {
 	private HashSet<GameObject> targets = new HashSet<GameObject> ();
 	public Transform CurrentTarget { get; private set; }
 
+	void Update() {
+		transform.Rotate(new Vector3(0,1,0), Time.deltaTime*50);
+	}
 
 	void OnTriggerEnter (Collider other)
 	{
