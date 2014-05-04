@@ -8,7 +8,7 @@ namespace Game {
 		private GameObject gameObject;
 		private List<LightCheckpoint> checkpoints;
 		private List<LightCheckpoint> interpolatedCheckpoints;
-		const float MAX_CHECKPOINT_DISTANCE = 0.1f;
+		const float MAX_CHECKPOINT_DISTANCE = 0.075f;
 
 		public LightCheckpoint EndCheckpoint {
 			get{ return interpolatedCheckpoints [interpolatedCheckpoints.Count - 1];}
@@ -68,10 +68,16 @@ namespace Game {
 		}
 
 		static void AddCheckpoints (List<LightCheckpoint> newCheckpoints, LightCheckpoint checkpoint, Vector3 p1, int steps) {
+			var xDiff = 0f;
+			var yDiff = 0f;
+
 			for (var step = 1; step < steps; step++) {
 				var currentLerp = 1f / steps * step;
 				var pos = Vector3.Lerp (p1, checkpoint.Position, currentLerp);
-				pos += new Vector3(Random.Range(-.2f, .2f), Random.Range(-.05f, .05f), Random.Range(-.2f, .2f));
+
+				xDiff += Random.Range((xDiff >= 0f ? -.1f : -.075f), (xDiff <= 0f ? .1f : .075f));
+				yDiff += Random.Range((yDiff >= 0f ? -.1f : -.075f), (yDiff <= 0f ? .1f : .075f));
+				pos += new Vector3(xDiff, Random.Range(-.05f, .05f), yDiff);
 				newCheckpoints.Add (new LightCheckpoint (pos));
 			}
 			newCheckpoints.Add (checkpoint);
