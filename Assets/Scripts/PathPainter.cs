@@ -1,16 +1,18 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+
 
 namespace Game {
 	public class PathPainter {
-		private Checkpoint[] Checkpoints { get; set; }
+		private List<LightCheckpoint> Checkpoints { get; set; }
 
 		TerrainData terrainData;
 		Terrain terrain;
 		float widthHeight;
 		const int pathSize = 40;
 		
-		public PathPainter (Checkpoint[] checkpoints, Terrain terrain) {
+		public PathPainter (List<LightCheckpoint> checkpoints, Terrain terrain) {
 			this.Checkpoints = checkpoints;
 
 			terrainData = terrain.terrainData;
@@ -75,7 +77,7 @@ namespace Game {
 
 			var c1 = Checkpoints [0].Position;
 			PaintPoint (map, new Vector2 (c1.x, c1.z), 2, 50);
-			var c2 = Checkpoints [Checkpoints.Length - 1].Position;
+			var c2 = Checkpoints [Checkpoints.Count - 1].Position;
 			PaintPoint (map, new Vector2 (c2.x, c2.z), 2, 30);
 			
 			terrainData.SetAlphamaps (0, 0, map);

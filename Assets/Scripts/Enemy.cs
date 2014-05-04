@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour {
 		private set{ state = value;}
 	}
 
-	private Checkpoint nextCheckpoint;
+	private LightCheckpoint nextCheckpoint;
 
 	// Use this for initialization
 	void Start () {

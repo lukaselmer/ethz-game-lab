@@ -7,7 +7,7 @@ namespace Game {
 		private int interval = 0;
 		private Wave currentWave;
 
-		Checkpoint start;
+		LightCheckpoint start;
 
 		GameObject enemyPrefab;
 		Transform enemyParent;

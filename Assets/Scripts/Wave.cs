@@ -9,14 +9,14 @@ class Wave {
 	Transform enemyParent;
 	int amount;
 	GameLogic game;
-	Checkpoint start;
+	LightCheckpoint start;
 	IList<Enemy> enemies;
 	
 	public bool Finished {
 		get{ return enemies.All ((el) => el.Finished);}
 	}
 
-	public Wave (GameLogic game, int amount, GameObject enemyPrefab, Checkpoint start, Transform enemyParent) {
+	public Wave (GameLogic game, int amount, GameObject enemyPrefab, LightCheckpoint start, Transform enemyParent) {
 		this.game = game;
 		this.amount = amount;
 		this.enemyPrefab = enemyPrefab;
