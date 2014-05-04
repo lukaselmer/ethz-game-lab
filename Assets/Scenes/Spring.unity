@@ -505,7 +505,7 @@ GameObject:
   - 4: {fileID: 490106228}
   - 114: {fileID: 490106230}
   - 154: {fileID: 490106229}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}

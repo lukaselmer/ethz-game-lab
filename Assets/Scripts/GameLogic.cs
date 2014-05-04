@@ -28,7 +28,7 @@ public class GameLogic : MonoBehaviour {
 		Maze = new Maze (gameObject, checkpoints);
 		
 		waveManager = new WaveManager (this, enemyPrefab, Maze, enemyParent);
-		waveManager.StartWaves ();
+		waveManager.StartNextWave ();
 	}
 
 	void Update () {

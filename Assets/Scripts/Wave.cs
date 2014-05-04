@@ -28,8 +28,8 @@ class Wave {
 		enemies = new List<Enemy> ();
 
 		for (var i = 0; i < amount; ++i) {
-			var enemy = ObjectFactory.CreateSmallEnemy(enemyParent, enemyPrefab, game, start.Position, 4f, 20f, i/2.0f);
-			enemies.Add(enemy);
+			var enemy = ObjectFactory.CreateSmallEnemy (enemyParent, enemyPrefab, game, start.Position, 4f, 20f, i / 2.0f);
+			enemies.Add (enemy);
 
 			/*var enemyObject = (GameObject)GameObject.Instantiate (enemyPrefab, start.Position, Quaternion.identity).GetComponent<Enemy> ();	
 			var enemy = enemyObject.GetComponent<Enemy> ();
