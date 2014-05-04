@@ -1957,7 +1957,7 @@ TerrainCollider:
   m_GameObject: {fileID: 2119759480}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: 6e1605a3f4ff24589b1a71452147e6b2, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 48f24fa006d964d4ba44745f3cfe1316, type: 2}
   m_CreateTreeColliders: 1
 --- !u!114 &2119759483
 MonoBehaviour:
