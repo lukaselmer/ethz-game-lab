@@ -5,7 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
   - enabled: 1
-    path: Assets/Scenes/SimpleScene.unity
+    path: Assets/Scenes/Summer.unity
+  - enabled: 1
+    path: Assets/Scenes/Levels.unity
+  - enabled: 1
+    path: Assets/Scenes/Fall.unity
+  - enabled: 1
+    path: Assets/Scenes/Winter.unity
+  - enabled: 1
+    path: Assets/Scenes/Spring.unity
