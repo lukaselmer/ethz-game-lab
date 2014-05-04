@@ -21,22 +21,22 @@ namespace Game {
 
 		GameLogic game;
 
+		private WaveConfig _waveConfig;
+
 		public WaveManager (GameLogic game, GameObject enemyPrefab, Maze maze, Transform enemyParent) {
-			this.game = game;
-			this.enemyPrefab = enemyPrefab;
-			this.start = maze.StartCheckpoint;
-			this.enemyParent = enemyParent;
+			_waveConfig = new WaveConfig(game, enemyPrefab, maze, enemyParent);
 
 			waves = new List<Wave>();
 			addWaves();
 		}
 
 		void addWaves () {
-			waves.Add(new Wave(game, 5, enemyPrefab, start, enemyParent));
-			waves.Add(new Wave(game, 8, enemyPrefab, start, enemyParent));
-			waves.Add(new Wave(game, 10, enemyPrefab, start, enemyParent));
-			waves.Add(new Wave(game, 15, enemyPrefab, start, enemyParent));
-			waves.Add(new Wave(game, 20, enemyPrefab, start, enemyParent));
+			waves.Add(new Wave(_waveConfig, 5, 4f, 20f));
+			waves.Add(new Wave(_waveConfig, 8, 4f, 20f));
+			waves.Add(new Wave(_waveConfig, 5, 8f, 10f));
+			waves.Add(new Wave(_waveConfig, 10, 6f, 20f));
+			waves.Add(new Wave(_waveConfig, 15, 4f, 20f));
+			waves.Add(new Wave(_waveConfig, 20, 4f, 30f));
 		}
 
 		public void StartNextWave () {

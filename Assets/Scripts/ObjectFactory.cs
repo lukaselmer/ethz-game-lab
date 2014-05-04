@@ -18,12 +18,12 @@ namespace Game {
 			instance = this;
 		}
 
-		public static Enemy CreateSmallEnemy(Transform enemyParent, GameObject enemyPrefab, GameLogic game, Vector3 startPosition, float speed, float health, float sleep)
+		public static Enemy CreateSmallEnemy(WaveConfig waveConfig, float speed, float health, float sleep)
 		{	
-			var enemyObject = (GameObject)GameObject.Instantiate (enemyPrefab /*TODO: use instance.smallEnemyPrefab*/, startPosition, Quaternion.identity);	
+			var enemyObject = (GameObject)GameObject.Instantiate (waveConfig.EnemyPrefab /*TODO: use instance.smallEnemyPrefab*/, waveConfig.Maze.StartCheckpoint.Position, Quaternion.identity);	
 			var enemy = enemyObject.GetComponent<Enemy> ();
-			enemy.transform.parent = enemyParent;
-			enemy.game = game;
+			enemy.transform.parent = waveConfig.EnemyParent;
+			enemy.game = waveConfig.Game;
 			enemy.speed = speed;
 			enemy.health = health;
 			enemy.SleepFor = sleep;
