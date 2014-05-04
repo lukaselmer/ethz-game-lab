@@ -71,7 +71,7 @@ namespace Game {
 			for (var step = 1; step < steps; step++) {
 				var currentLerp = 1f / steps * step;
 				var pos = Vector3.Lerp (p1, checkpoint.Position, currentLerp);
-				//pos += new Vector3(Random.Range(-.2f, .2f), Random.Range(-.05f, .05f), Random.Range(-.2f, .2f));
+				pos += new Vector3(Random.Range(-.2f, .2f), Random.Range(-.05f, .05f), Random.Range(-.2f, .2f));
 				newCheckpoints.Add (new LightCheckpoint (pos));
 			}
 			newCheckpoints.Add (checkpoint);
