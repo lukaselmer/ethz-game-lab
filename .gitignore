@@ -12,3 +12,5 @@
 *.pidb
 *.user
 *.suo
+Assembly-CSharp-firstpass-vs.csproj.DotSettings
+Assembly-CSharp-vs.csproj.DotSettings

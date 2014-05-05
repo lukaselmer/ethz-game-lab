@@ -5,65 +5,72 @@ using System.Linq;
 
 
 namespace Game {
-	public class WaveManager {
-		private int interval = 0;
-		private int pauseBetweenWaves = 5;
-		private Wave currentWave;
+    public class WaveManager {
+        private int interval = 0;
+        private int pauseBetweenWaves = 5;
+        private Wave currentWave;
 
-		LightCheckpoint start;
+        LightCheckpoint start;
 
-		GameObject enemyPrefab;
-		Transform enemyParent;
-		
-		private float pauseBetweenNextWave = 0;
-		private int currentWaveNumber = 0;
-		private IList<Wave> waves;
+        GameObject enemyPrefab;
+        Transform enemyParent;
 
-		GameLogic game;
+        private float pauseBetweenNextWave = 0;
+        private int currentWaveNumber = 0;
+        private IList<Wave> waves;
 
-		private WaveConfig _waveConfig;
+        GameLogic game;
 
-		public WaveManager (GameLogic game, GameObject enemyPrefab, Maze maze, Transform enemyParent) {
-			_waveConfig = new WaveConfig(game, enemyPrefab, maze, enemyParent);
+        private WaveConfig _waveConfig;
+        private bool _waveRunning;
 
-			waves = new List<Wave>();
-			addWaves();
-		}
+        public WaveManager(GameLogic game, GameObject enemyPrefab, Maze maze, Transform enemyParent) {
+            _waveConfig = new WaveConfig(game, enemyPrefab, maze, enemyParent);
 
-		void addWaves () {
-			waves.Add(new Wave(_waveConfig, 5, 4f, 20f));
-			waves.Add(new Wave(_waveConfig, 8, 4f, 20f));
-			waves.Add(new Wave(_waveConfig, 5, 8f, 10f));
-			waves.Add(new Wave(_waveConfig, 10, 6f, 20f));
-			waves.Add(new Wave(_waveConfig, 15, 4f, 20f));
-			waves.Add(new Wave(_waveConfig, 20, 4f, 30f));
-		}
+            waves = new List<Wave>();
+            addWaves();
+        }
 
-		public void StartNextWave () {
-			currentWave = waves[currentWaveNumber++];
-			currentWave.Start();
-			pauseBetweenNextWave = pauseBetweenWaves;
-		}
+        void addWaves() {
+            waves.Add(new Wave(_waveConfig, 5, 4f, 20f));
+            waves.Add(new Wave(_waveConfig, 8, 4f, 20f));
+            waves.Add(new Wave(_waveConfig, 5, 8f, 10f));
+            waves.Add(new Wave(_waveConfig, 10, 6f, 20f));
+            waves.Add(new Wave(_waveConfig, 15, 4f, 20f));
+            waves.Add(new Wave(_waveConfig, 20, 4f, 30f));
+        }
 
-		public void Update () {
-			if(interval++ % 10 == 0){
-				CheckWave();
-			}
-		}
+        public void StartNextWave() {
+            currentWave = waves[currentWaveNumber++];
+            currentWave.Start();
+            _waveRunning = true;
+        }
 
-		bool HasNewWave () {
-			return currentWaveNumber < waves.Count;
-		}
+        public void Update() {
+            if (interval++ % 10 == 0) {
+                CheckWave();
+            }
+        }
 
-		void CheckWave () {
-			if(currentWave == null) return;
-			if(!currentWave.Finished) return;
-			
-			pauseBetweenNextWave -= Time.deltaTime;
-			if(pauseBetweenNextWave < 0) return;
+        bool HasNewWave() {
+            return currentWaveNumber < waves.Count;
+        }
 
-			if(HasNewWave()) StartNextWave();
-		}
-	}
+        void CheckWave() {
+            if (currentWave == null) return;
+            if (!currentWave.Finished) return;
+
+            if (_waveRunning) {
+                _waveRunning = false;
+                pauseBetweenNextWave = pauseBetweenWaves;
+            }
+
+            pauseBetweenNextWave -= Time.deltaTime;
+            if (pauseBetweenNextWave < 0) return;
+
+            if (HasNewWave()) StartNextWave();
+            else game.AllWavesFinished();
+        }
+    }
 }
 
