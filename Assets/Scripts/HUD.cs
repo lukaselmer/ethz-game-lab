@@ -12,19 +12,19 @@ public class HUD : MonoBehaviour
 		                                  GameLogic.I.EnemiesKilled, GameLogic.I.EnemiesSurvived, GameLogic.I.PlayTime);
 
 		
-		if (InputHandler.I.SelectedTower != null) {
-			guiTower.text = string.Format ("Size: {0:F1}", InputHandler.I.SelectedTower.Size);
-		} else {
-			guiTower.text = "";
-		}
+		//if (InputHandler.I.SelectedTower != null) {
+		//	guiTower.text = string.Format ("Size: {0:F1}", InputHandler.I.SelectedTower.Size);
+		//} else {
+		//	guiTower.text = "";
+		//}
 	}
 	
 	void OnGUI ()
 	{
-		if (InputHandler.I.SelectedTower != null) {
-			if (GUI.Button (new Rect (Screen.width-110, 30, 100, 30), TowerPlacement.Instance.PlacementMode ? "Placing..." : "Branch Tower")) {
-				TowerPlacement.Instance.PlacementMode = true;
-			}
-		}
+		//if (InputHandler.I.SelectedTower != null) {
+		//	if (GUI.Button (new Rect (Screen.width-110, 30, 100, 30), TreePlacement.Instance.PlacementMode ? "Placing..." : "Branch Tower")) {
+		//		TreePlacement.Instance.PlacementMode = true;
+		//	}
+		//}
 	}
 }

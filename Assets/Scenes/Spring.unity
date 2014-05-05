@@ -262,6 +262,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea305d5dbda004bea853aee1b05b54c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &357900832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 357900833}
+  m_Layer: 0
+  m_Name: FirstTreePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &357900833
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 357900832}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.405426, y: 0, z: -16.395071}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &471447999
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,48 +635,6 @@ Transform:
   - {fileID: 1408859413}
   - {fileID: 489046850}
   m_Father: {fileID: 1679991753}
---- !u!1 &648321118
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 648321120}
-  - 114: {fileID: 648321119}
-  m_Layer: 0
-  m_Name: Tree
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &648321119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 648321118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f96dd5e0d46ad48a1a6b0d5c5c48335d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  branchLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  branchPrefab: {fileID: 100000, guid: bb921e1a991914ec6a22d3f4a0555043, type: 3}
---- !u!4 &648321120
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 648321118}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.0664139, y: 0, z: 20.6920185}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1679991753}
 --- !u!1 &667212184
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +773,9 @@ MonoBehaviour:
   - {fileID: 977459434}
   - {fileID: 1681389127}
   - {fileID: 481584178}
+  firstTreePosition: {fileID: 357900832}
+  treePrefab: {fileID: 100000, guid: be81808a159be41eda059fe8b264a16a, type: 2}
+  treeParent: {fileID: 1679991753}
 --- !u!1 &907748283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1341,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 542290990}
-  - {fileID: 648321120}
   m_Father: {fileID: 0}
 --- !u!1 &1681389125
 GameObject:
@@ -1614,9 +1600,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299c79477a9884f08a04eeadadfddc05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerBaseLayer:
+  sawLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4096
+  branchLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &1835878184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,17 +1668,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1854695030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 646793a9de15d43b69b98e089350eaaf, type: 3}
+  m_Script: {fileID: 11500000, guid: 10cc988dd9a574e8ea3097a7c86a7fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 100016, guid: 7836b634405f348c4941ad60c1d1b850, type: 2}
-  towerParent: {fileID: 1679991753}
+  treePrefab: {fileID: 100000, guid: be81808a159be41eda059fe8b264a16a, type: 2}
+  treeParent: {fileID: 1679991753}
   terrainLayer:
     serializedVersion: 2
     m_Bits: 256
-  towerLayer:
+  branchLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2048
 --- !u!1 &1913999135
 GameObject:
   m_ObjectHideFlags: 0

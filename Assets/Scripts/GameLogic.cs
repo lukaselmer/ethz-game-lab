@@ -21,6 +21,10 @@ public class GameLogic : MonoBehaviour {
 
     public Maze Maze { get; private set; }
 
+	public GameObject firstTreePosition;
+	public GameObject treePrefab;
+	public Transform treeParent;
+
     public static GameLogic I {
         get {
             return FindObjectOfType<GameLogic>();
@@ -30,6 +34,9 @@ public class GameLogic : MonoBehaviour {
     void Start() {
         _gameState = GameState.Running;
         Lives = 10;
+
+		InitFirstTree ();
+
         Maze = new Maze(gameObject, checkpoints);
 
         waveManager = new WaveManager(this, enemyPrefab, Maze, enemyParent);
@@ -40,6 +47,15 @@ public class GameLogic : MonoBehaviour {
         PlayTime += Time.deltaTime;
         waveManager.Update();
     }
+
+	void InitFirstTree() {
+		
+		GameObject treeObject = (GameObject)Instantiate (treePrefab, firstTreePosition.transform.position, Quaternion.identity);	
+		treeObject.transform.parent = treeParent;
+		treeObject.name = "FirstTree";
+		Treee tree = treeObject.GetComponent<Treee> ();
+		tree.Root = Branch.InstantiateRoot (tree, null, tree.transform); 
+	}
 
     public void Finished(Enemy enemy) {
         if (enemy.Dead)
