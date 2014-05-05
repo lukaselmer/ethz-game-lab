@@ -6,6 +6,7 @@ public class InputHandler : MonoBehaviour {
 	public LayerMask sawLayer;
 	public LayerMask branchLayer;
 	public Branch SelectedBranch { get; private set; }
+	public Selectable Selected { get; private set; }
 	
 	public static InputHandler I {
 		get {
@@ -24,6 +25,8 @@ public class InputHandler : MonoBehaviour {
 			if (SelectedBranch && TreePlacement.Instance.PlacementMode) {
 				if (TreePlacement.Instance.placeTree (Input.mousePosition, SelectedBranch)) {
 					TreePlacement.Instance.PlacementMode = false;
+					Selected.UnSelect();
+					SelectedBranch = null;
 				}
 
 			}
@@ -48,16 +51,21 @@ public class InputHandler : MonoBehaviour {
 				var newSelection = selectedGameObject.GetComponent<Branch>();
 
 				if (SelectedBranch && newSelection != SelectedBranch) {
-					SelectedBranch.UnSelect();
+					Selected.UnSelect();
 				}
 
 				SelectedBranch = newSelection;
-				SelectedBranch.Select();
+				Selected = SelectedBranch;
+
+				if (SelectedBranch.depth <= 1) {
+					Selected = newSelection.tree;
+				}
+				Selected.Select();
  			}
 		}
 
 		if (Input.GetMouseButton (2) && SelectedBranch) {
-			SelectedBranch.UnSelect();
+			Selected.UnSelect();
 			SelectedBranch = null;
 		}	
 	}

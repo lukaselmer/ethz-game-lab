@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour {
 			Destroy (other.gameObject);
 
 			if (health <= 0) {
-				projectile.origin.Size += 0.1f;
+				projectile.origin.Root.Grow(0.1f);
 				state = EnemyState.Dead;
 				game.Finished (this);
 				Destroy (gameObject);

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Branch : MonoBehaviour {
+public class Branch : MonoBehaviour, Selectable {
 
 	public Treee tree;
 	private Branch parent;
@@ -89,8 +89,8 @@ public class Branch : MonoBehaviour {
 	public void Attach(Treee tree) {
 		var oldDepth = depth;
 		parent.branches.Remove (this);
-		DecreaseDepth (depth-1);
-		DecreaseSize (depth - 1);
+
+		AdjustChildren (depth - 1, tree);
 		tree.Root = this;
 		this.transform.parent = tree.transform;
 		this.Size = Mathf.Pow (0.66f, oldDepth-1); 
@@ -99,17 +99,13 @@ public class Branch : MonoBehaviour {
 		this.transform.localRotation = Quaternion.identity;
 	}
 
-	public void DecreaseSize (int n) {
-		Size *= Mathf.Pow (0.66f, n); ;
-		foreach (Branch branch in branches) {
-			branch.DecreaseSize(n);
-		}
-	}
-
-	public void DecreaseDepth (int n) {
+	public void AdjustChildren (int n, Treee tree) {
+		
+		Size *= Mathf.Pow (0.66f, n);
 		depth -= n;
+		this.tree = tree;
 		foreach (Branch branch in branches) {
-			branch.DecreaseDepth(n);
+			branch.AdjustChildren(n, tree);
 		}
 	}
 

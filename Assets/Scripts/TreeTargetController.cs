@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class TowerTargetController : MonoBehaviour {
+public class TreeTargetController : MonoBehaviour {
 	
 	private HashSet<GameObject> targets = new HashSet<GameObject> ();
 	public Transform CurrentTarget { get; private set; }

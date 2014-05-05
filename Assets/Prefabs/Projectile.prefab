@@ -130,7 +130,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpeed: 10
   myRange: 10
-  myDamage: 5
+  myDamage: 10
+  target: {fileID: 0}
+  origin: {fileID: 0}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
