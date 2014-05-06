@@ -19,8 +19,6 @@ namespace Game {
         private int currentWaveNumber = 0;
         private IList<Wave> waves;
 
-        GameLogic game;
-
         private WaveConfig _waveConfig;
         private bool _waveRunning;
 
@@ -32,12 +30,26 @@ namespace Game {
         }
 
         void addWaves() {
-            waves.Add(new Wave(_waveConfig, 5, 4f, 20f));
-            waves.Add(new Wave(_waveConfig, 8, 4f, 20f));
+			if(Application.loadedLevelName == "Spring"){
+				waves.Add(new Wave(_waveConfig, 2, 8f, 20f));
+			}
+			if(Application.loadedLevelName == "Summer"){
+				waves.Add(new Wave(_waveConfig, 2, 8f, 20f));
+				waves.Add(new Wave(_waveConfig, 30, 8f, 200f));
+			}
+			if(Application.loadedLevelName == "Fall"){
+				waves.Add(new Wave(_waveConfig, 3, 8f, 20f));
+			}
+			if(Application.loadedLevelName == "Winter"){
+				waves.Add(new Wave(_waveConfig, 3, 8f, 20f));
+			}
+
+			//waves.Add(new Wave(_waveConfig, 2, 8f, 20f));
+            /*waves.Add(new Wave(_waveConfig, 8, 4f, 20f));
             waves.Add(new Wave(_waveConfig, 5, 8f, 10f));
             waves.Add(new Wave(_waveConfig, 10, 6f, 20f));
             waves.Add(new Wave(_waveConfig, 15, 4f, 20f));
-            waves.Add(new Wave(_waveConfig, 20, 4f, 30f));
+            waves.Add(new Wave(_waveConfig, 20, 4f, 30f));*/
         }
 
         public void StartNextWave() {
@@ -69,7 +81,7 @@ namespace Game {
             if (pauseBetweenNextWave < 0) return;
 
             if (HasNewWave()) StartNextWave();
-            else game.AllWavesFinished();
+			else _waveConfig.Game.AllWavesFinished();
         }
     }
 }

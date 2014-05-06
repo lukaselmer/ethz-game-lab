@@ -88,28 +88,34 @@ public class GameLogic : MonoBehaviour {
     }
 
     public void OnGUI() {
-        if (_gameState == GameState.Won) {
-            GUI.BeginGroup(new Rect((Screen.width / 2) - 50, (Screen.height / 2) - 60, 100, 120));
+		int btnWidth = 200;
+		int btnHeight = 50;
 
-            GUI.Label(new Rect(0, 0, 100, 20), "You won, congratulations!");
+		if (_gameState == GameState.Won || true) {
+			GUI.Box(new Rect((Screen.width / 2) - 110, (Screen.height / 2) - 60,220,140), "You won, congratulations!");
 
-            if (GUI.Button(new Rect(0, 20, 100, 50), "Continue to next Level!"))
-                Application.LoadLevel("Levels");
+			GUI.BeginGroup(new Rect((Screen.width / 2) - btnWidth/2, (Screen.height / 2) - 60, btnWidth, 130));
+
+			if (GUI.Button(new Rect(0, 25, btnWidth, btnHeight), "Continue to next Level!"))
+				new LevelSelection().LoadNextLevel();
+
+			if (GUI.Button(new Rect(0, 80, btnWidth, btnHeight), "Back"))
+				new LevelSelection().LoadLevels();
             
             GUI.EndGroup();
         }
-        else if (_gameState == GameState.Lost) {
-            GUI.BeginGroup(new Rect((Screen.width / 2) - 50, (Screen.height / 2) - 60, 100, 120));
-
-            GUI.Label(new Rect(0, 0, 100, 20), "Sorry, you lost :(");
-
-            if (GUI.Button(new Rect(0, 20, 100, 50), "Play Again"))
-                Application.LoadLevel(Application.loadedLevelName);
-
-            if (GUI.Button(new Rect(0, 70, 100, 50), "Quit"))
-                Application.LoadLevel("Levels");
-
-            GUI.EndGroup();
+		else if (_gameState == GameState.Lost) {
+			GUI.Box(new Rect((Screen.width / 2) - 110, (Screen.height / 2) - 60,220,140), "Sorry, you lost :(");
+			
+			GUI.BeginGroup(new Rect((Screen.width / 2) - btnWidth/2, (Screen.height / 2) - 60, btnWidth, 130));
+			
+			if (GUI.Button(new Rect(0, 25, btnWidth, btnHeight), "Play Again!"))
+				new LevelSelection().ReplayLevel();
+			
+			if (GUI.Button(new Rect(0, 80, btnWidth, btnHeight), "Back"))
+				new LevelSelection().LoadLevels();
+			
+			GUI.EndGroup();
         }
     }
 
