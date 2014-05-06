@@ -91,7 +91,13 @@ public class GameLogic : MonoBehaviour {
 		int btnWidth = 200;
 		int btnHeight = 50;
 
-		if (_gameState == GameState.Won || true) {
+		if (GUI.Button(new Rect(10, 10, 100, 30), "Back to Menu"))
+			new LevelSelection().LoadLevels();
+		
+		if (GUI.Button(new Rect(120, 10, 100, 30), "Restart Level"))
+			new LevelSelection().ReplayLevel();
+
+		if (_gameState == GameState.Won) {
 			GUI.Box(new Rect((Screen.width / 2) - 110, (Screen.height / 2) - 60,220,140), "You won, congratulations!");
 
 			GUI.BeginGroup(new Rect((Screen.width / 2) - btnWidth/2, (Screen.height / 2) - 60, btnWidth, 130));
