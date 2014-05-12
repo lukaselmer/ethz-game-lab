@@ -10,7 +10,7 @@ public class Treee : MonoBehaviour, Selectable {
 	public int maxDepth = 5;
 	public int yOffsetMin = 5;
 	public int yOffsetMax = 10;
-	public float growFactor = 0.01f;
+	public float growFactor = 0.02f;
 	
 	public GameObject projectilePrefab;
 	public float reloadTime = 1.0f;
