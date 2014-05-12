@@ -12,11 +12,11 @@ public class HUD : MonoBehaviour
 		                                  GameLogic.I.EnemiesKilled, GameLogic.I.EnemiesSurvived, GameLogic.I.PlayTime);
 
 		
-		//if (InputHandler.I.SelectedTower != null) {
-		//	guiTower.text = string.Format ("Size: {0:F1}", InputHandler.I.SelectedTower.Size);
-		//} else {
-		//	guiTower.text = "";
-		//}
+		if (InputHandler.I.Selected is Treee) {
+			guiTower.text = string.Format ("Size: {0:F1}", (InputHandler.I.Selected as Treee).Size);
+		} else {
+			guiTower.text = "";
+		}
 	}
 	
 	void OnGUI ()

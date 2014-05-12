@@ -10,7 +10,7 @@ namespace Game {
 		TerrainData terrainData;
 		Terrain terrain;
 		float widthHeight;
-		const int pathSize = 40;
+		int pathSize = 20;
 		
 		public PathPainter (List<LightCheckpoint> checkpoints, Terrain terrain) {
 			this.Checkpoints = checkpoints;
@@ -18,6 +18,7 @@ namespace Game {
 			terrainData = terrain.terrainData;
 			widthHeight = terrainData.size.x;
 			var leftTop = terrain.transform.position.x;
+			pathSize = (int)(widthHeight / 10);
 
 			if (widthHeight != terrainData.size.z || leftTop != terrain.transform.position.z || widthHeight + 2 * leftTop != 0.0)
 				throw new Exception ("Invalid terrain configuration!");
@@ -76,9 +77,9 @@ namespace Game {
 			}
 
 			var c1 = Checkpoints [0].Position;
-			PaintPoint (map, new Vector2 (c1.x, c1.z), 2, 50);
+			PaintPoint (map, new Vector2 (c1.x, c1.z), 2, pathSize);
 			var c2 = Checkpoints [Checkpoints.Count - 1].Position;
-			PaintPoint (map, new Vector2 (c2.x, c2.z), 2, 30);
+			PaintPoint (map, new Vector2 (c2.x, c2.z), 2, pathSize);
 			
 			terrainData.SetAlphamaps (0, 0, map);
 		}

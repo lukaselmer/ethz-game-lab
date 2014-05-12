@@ -87,15 +87,24 @@ public class GameLogic : MonoBehaviour {
             _gameState = GameState.Won;
     }
 
+	private bool showHelp = false;
     public void OnGUI() {
 		int btnWidth = 200;
 		int btnHeight = 50;
+
+		
+		if (GUI.Button (new Rect (230, 10, 100, 30), "Help"))
+			showHelp = !showHelp;
 
 		if (GUI.Button(new Rect(10, 10, 100, 30), "Back to Menu"))
 			new LevelSelection().LoadLevels();
 		
 		if (GUI.Button(new Rect(120, 10, 100, 30), "Restart Level"))
 			new LevelSelection().ReplayLevel();
+
+		if (showHelp) {
+			GUI.TextArea(new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 50,300,120), "HOW TO PLAY\n\nBreak of branches to plant new trees:\n- Select branch\n- Click cylinder\n- Click with left mouse button on terrain");
+		}
 
 		if (_gameState == GameState.Won) {
 			GUI.Box(new Rect((Screen.width / 2) - 110, (Screen.height / 2) - 60,220,140), "You won, congratulations!");
