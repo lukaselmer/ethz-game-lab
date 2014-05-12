@@ -103,7 +103,7 @@ public class GameLogic : MonoBehaviour {
 			new LevelSelection().ReplayLevel();
 
 		if (showHelp) {
-			GUI.TextArea(new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 50,300,120), "HOW TO PLAY\n\nBreak of branches to plant new trees:\n- Select branch\n- Click cylinder\n- Click with left mouse button on terrain");
+			GUI.TextArea(new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 50,300,120), "HOW TO PLAY\n\nBreak of branches to plant new trees:\n- Select branch\n- Click cylinder\n- Click with right mouse button on terrain");
 		}
 
 		if (_gameState == GameState.Won) {
