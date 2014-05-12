@@ -44,10 +44,20 @@ namespace Game {
 				waves.Add(new Wave(_waveConfig, 1, 6f, 60f));
 			}
 			if(Application.loadedLevelName == "Fall"){
-				waves.Add(new Wave(_waveConfig, 3, 8f, 20f));
+				waves.Add(new Wave(_waveConfig, 10, 10f, 5f));
+				waves.Add(new Wave(_waveConfig, 10, 10f, 10f));
+				waves.Add(new Wave(_waveConfig, 10, 10f, 15f));
+				waves.Add(new Wave(_waveConfig, 10, 10f, 20f));
+				waves.Add(new Wave(_waveConfig, 10, 10f, 25f));
+				waves.Add(new Wave(_waveConfig, 1, 3f, 200f));
 			}
 			if(Application.loadedLevelName == "Winter"){
-				waves.Add(new Wave(_waveConfig, 3, 8f, 20f));
+				waves.Add(new Wave(_waveConfig, 10, 10f, 5f));
+				waves.Add(new Wave(_waveConfig, 4, 8f, 20f));
+				waves.Add(new Wave(_waveConfig, 8, 12f, 20f));
+				waves.Add(new Wave(_waveConfig, 12, 14f, 20f));
+				waves.Add(new Wave(_waveConfig, 2, 6f, 60f));
+				waves.Add(new Wave(_waveConfig, 1, 6f, 180f));
 			}
 
 			//waves.Add(new Wave(_waveConfig, 2, 8f, 20f));
