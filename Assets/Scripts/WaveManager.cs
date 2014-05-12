@@ -38,7 +38,10 @@ namespace Game {
 			}
 			if(Application.loadedLevelName == "Summer"){
 				waves.Add(new Wave(_waveConfig, 2, 8f, 20f));
-				waves.Add(new Wave(_waveConfig, 30, 8f, 200f));
+				waves.Add(new Wave(_waveConfig, 4, 10f, 20f));
+				waves.Add(new Wave(_waveConfig, 8, 12f, 20f));
+				waves.Add(new Wave(_waveConfig, 12, 14f, 20f));
+				waves.Add(new Wave(_waveConfig, 1, 6f, 60f));
 			}
 			if(Application.loadedLevelName == "Fall"){
 				waves.Add(new Wave(_waveConfig, 3, 8f, 20f));
