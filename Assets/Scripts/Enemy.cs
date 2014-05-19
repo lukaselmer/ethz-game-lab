@@ -53,9 +53,10 @@ public class Enemy : MonoBehaviour {
 		var directionTowardsEnemy = checkpointPosition - myPosition;
 		var movementTowardsEnemy = directionTowardsEnemy; //new Vector3(directionTowardsEnemy.x, 0, directionTowardsEnemy.z);
 
-		var delta = 0.25;
+
+		var delta = 2.0;
 		if (movementTowardsEnemy.magnitude < delta) {
-			if (game.Maze.EndCheckpoint == nextCheckpoint) {
+	 		if (game.Maze.EndCheckpoint == nextCheckpoint) {
 				state = EnemyState.Survived;
 				game.Finished (this);
 				Destroy (gameObject);
@@ -65,8 +66,12 @@ public class Enemy : MonoBehaviour {
 			return;
 		}
 
-		var movement = speed * Time.deltaTime * movementTowardsEnemy.normalized;
-		gameObject.transform.Translate (movement);
+		//var movement = speed * Time.deltaTime * movementTowardsEnemy.normalized;
+		//gameObject.transform.Translate (movement);
+
+		gameObject.transform.LookAt (nextCheckpoint.Position);
+		gameObject.transform.Translate (Vector3.forward * Time.deltaTime * speed);
+
 	}
 	
 	void OnTriggerEnter (Collider other) {
