@@ -27,9 +27,9 @@ public class TreePlacement : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit, 1000, terrainLayer)) {
 
-			if ((hit.point - originTree.transform.position).magnitude > originTree.Size * 5) {
-				return false;
-			}
+			//if ((hit.point - originTree.transform.position).magnitude > originTree.Size * 5) {
+			//	return false;
+			//}
 			
 			// check if allready trees are near mouse hitpoint
 			var treesNearPoint = Physics.OverlapSphere (hit.point, 1, branchLayer);

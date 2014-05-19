@@ -18,9 +18,13 @@ public class InputHandler : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+					
+		// Handle left click
+		if (Input.GetMouseButtonDown (0)) {	
 
-		// Handle right click
-		if (Input.GetMouseButton (1)) {	
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			RaycastHit hit;
+
 			// Placing
 			if (SelectedBranch && TreePlacement.Instance.PlacementMode) {
 				if (TreePlacement.Instance.placeTree (Input.mousePosition, SelectedBranch)) {
@@ -28,14 +32,8 @@ public class InputHandler : MonoBehaviour {
 					Selected.UnSelect();
 					SelectedBranch = null;
 				}
-
+				return;
 			}
-		}
-					
-		// Handle left click
-		if (Input.GetMouseButton (0)) {	
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			RaycastHit hit;
 
 			// Branching
 			if (SelectedBranch && SelectedBranch.depth > 1 && Physics.Raycast (ray, out hit, 1000, sawLayer)) {
@@ -64,7 +62,7 @@ public class InputHandler : MonoBehaviour {
  			}
 		}
 
-		if (Input.GetMouseButton (2) && SelectedBranch) {
+		if (Input.GetMouseButtonDown (2) && SelectedBranch) {
 			Selected.UnSelect();
 			SelectedBranch = null;
 		}	

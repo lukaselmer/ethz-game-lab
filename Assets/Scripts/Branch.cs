@@ -90,7 +90,7 @@ public class Branch : MonoBehaviour, Selectable {
 		var oldDepth = depth;
 		parent.branches.Remove (this);
 
-		AdjustChildren (depth - 1, tree);
+		AdjustChildren (depth-1, tree);
 		tree.Root = this;
 		this.transform.parent = tree.transform;
 		this.Size = Mathf.Pow (0.66f, oldDepth-1); 
