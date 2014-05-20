@@ -49,7 +49,6 @@ public class GameLogic : MonoBehaviour {
     }
 
 	void InitFirstTree() {
-		
 		GameObject treeObject = (GameObject)Instantiate (treePrefab, firstTreePosition.transform.position, Quaternion.identity);	
 		treeObject.transform.parent = treeParent;
 		treeObject.name = "FirstTree";
@@ -103,11 +102,16 @@ public class GameLogic : MonoBehaviour {
 			new LevelSelection().ReplayLevel();
 
 		if (showHelp) {
-			GUI.TextArea(new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 50,300,120), "HOW TO PLAY\n\n" +
+			GUI.TextArea(new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 100,300,220), "HOW TO PLAY\n\n" +
 				"Break of branches to plant new trees:\n" +
 				"- Select branch\n" +
 				"- Click white ring\n" +
-				"- Click on terrain to place the new tree");
+				"- Click on terrain to place the new tree\n\n"+
+                "Scroll Wheel = Zoom\n" +
+                "Shift + Scroll Wheel = Rotate\n" +
+                "Two fingers = Drag map\n" +
+                "Three fingers = Rotate map\n"
+				);
 		}
 
 		if (_gameState == GameState.Won) {
