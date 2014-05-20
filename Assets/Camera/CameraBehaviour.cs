@@ -48,9 +48,12 @@ public class CameraBehaviour : MonoBehaviour {
         if (!Input.GetMouseButton(0)) return;
 
         var pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
+
         var move = new Vector3(pos.x, 0, pos.y);
+        if (Input.touchCount == 2) move *= -1;
 
         move = Quaternion.AngleAxis(rotationAngle, Vector3.up) * move;
+        
         transform.Translate(move, Space.World);
     }
 
