@@ -87,8 +87,10 @@ public class GameLogic : MonoBehaviour {
     }
 
     public void AllWavesFinished() {
-        if (_gameState == GameState.Running)
+        if (_gameState == GameState.Running){
             _gameState = GameState.Won;
+			LevelSelection.UnlockNextLevel();
+		}
     }
 
 	private bool showHelp = false;
