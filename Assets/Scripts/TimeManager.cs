@@ -10,15 +10,23 @@ public class TimeManager {
 	public static float GetDeltaTime () {
 		return _timeManager.DeltaTime;
 	}
-	
-	public static void Faster () {
-		_timeManager.speed = Mathf.Min(3.0f, _timeManager.speed + 0.5f);
+
+	public static void Pause () {
+		_timeManager.speed = 0;
 	}
 	
-	public static void Slower () {
-		_timeManager.speed = Mathf.Max(0.0f, _timeManager.speed - 0.5f);
+	public static void Speed1 () {
+		_timeManager.speed = 1;
 	}
 	
+	public static void Speed2 () {
+		_timeManager.speed = 2;
+	}
+	
+	public static void Speed3 () {
+		_timeManager.speed = 4;
+	}
+
 	public float DeltaTime {
 		get {
 			return Time.deltaTime * speed;
