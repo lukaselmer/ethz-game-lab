@@ -26,6 +26,22 @@ public class GameLogic : MonoBehaviour {
 		}
 	}
 
+	public bool AreEnemiesFrozen {
+		get {
+			return _spellManager.AreEnemiesFrozen;
+		}
+	}
+	
+	public bool IsPoisonSpellActive {
+		get {
+			return _spellManager.IsPoisonSpellActive;
+		}
+	}
+
+	public void DamageAllEnemies (float damage) {
+		waveManager.CurrentWave.DamageAllEnemies(damage);
+	}
+
 	public GameObject enemyPrefab;
 	public Transform enemyParent;
 	public Checkpoint[] checkpoints;

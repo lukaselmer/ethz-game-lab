@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour {
 		if (Finished)
 			return;
 		if (SleepFor >= 0) {
-			SleepFor -= TimeManager.GetDeltaTime();
+			SleepFor -= TimeManager.GetDeltaTime ();
 			if (SleepFor >= 0)
 				return;
 
@@ -47,6 +47,8 @@ public class Enemy : MonoBehaviour {
 		if (gameObject == null)
 			return;
 
+		CheckPoisoning ();
+
 		var checkpointPosition = nextCheckpoint.Position;
 		var myPosition = transform.position;
 
@@ -56,7 +58,7 @@ public class Enemy : MonoBehaviour {
 
 		var delta = 2.0;
 		if (movementTowardsEnemy.magnitude < delta) {
-	 		if (game.Maze.EndCheckpoint == nextCheckpoint) {
+			if (game.Maze.EndCheckpoint == nextCheckpoint) {
 				state = EnemyState.Survived;
 				game.Finished (this);
 				Destroy (gameObject);
@@ -68,27 +70,49 @@ public class Enemy : MonoBehaviour {
 
 		//var movement = speed * TimeManager.GetDeltaTime() * movementTowardsEnemy.normalized;
 		//gameObject.transform.Translate (movement);
+		
+		if (GameLogic.I.AreEnemiesFrozen)
+			return;
 
 		gameObject.transform.LookAt (nextCheckpoint.Position);
-		gameObject.transform.Translate (Vector3.forward * TimeManager.GetDeltaTime() * speed);
-
+		gameObject.transform.Translate (Vector3.forward * TimeManager.GetDeltaTime () * speed);
 	}
 	
 	void OnTriggerEnter (Collider other) {
-		if (other.gameObject.tag == "Projectile") {
+		if (other.gameObject.tag != "Projectile")
+			return;
 
-			Projectile projectile = other.gameObject.GetComponent<Projectile> ();
+		Projectile projectile = other.gameObject.GetComponent<Projectile> ();
+		health -= projectile.myDamage;
+		Destroy (other.gameObject);
+		CheckHealth (projectile);
+	}
 
-			health -= projectile.myDamage;
+	void CheckHealth (Projectile projectile = null) {
+		if (health > 0)
+			return;
 
-			Destroy (other.gameObject);
+		if (projectile != null)
+			projectile.origin.Root.Grow (0.1f);
 
-			if (health <= 0) {
-				projectile.origin.Root.Grow(0.1f);
-				state = EnemyState.Dead;
-				game.Finished (this);
-				Destroy (gameObject);
-			}
-		}
+		state = EnemyState.Dead;
+		game.Finished (this);
+		Destroy (gameObject);
+	}
+
+	void CheckPoisoning () {
+		if (!GameLogic.I.IsPoisonSpellActive)
+			return;
+
+		var damage = TimeManager.GetDeltaTime () * 0.4f;
+		Damage (damage);
+	}
+
+	public void Damage (float damage) {
+		if (state != EnemyState.Running)
+			return;
+
+		health -= damage;
+		CheckHealth ();
 	}
 }
