@@ -44,7 +44,7 @@ public class GameLogic : MonoBehaviour {
     }
 
     void Update() {
-        PlayTime += Time.deltaTime;
+        PlayTime += TimeManager.GetDeltaTime();
         waveManager.Update();
     }
 
@@ -91,7 +91,12 @@ public class GameLogic : MonoBehaviour {
 		int btnWidth = 200;
 		int btnHeight = 50;
 
+		if (GUI.Button (new Rect (Screen.width - 110, 10, 100, 30), "Slower"))
+			TimeManager.Slower();
 		
+		if (GUI.Button (new Rect (Screen.width - 220, 10, 100, 30), "Faster"))
+			TimeManager.Faster();
+
 		if (GUI.Button (new Rect (230, 10, 100, 30), "Help"))
 			showHelp = !showHelp;
 

@@ -93,7 +93,7 @@ namespace Game {
                 pauseBetweenNextWave = pauseBetweenWaves;
             }
 
-            pauseBetweenNextWave -= Time.deltaTime;
+            pauseBetweenNextWave -= TimeManager.GetDeltaTime();
             if (pauseBetweenNextWave < 0) return;
 
             if (HasNewWave()) StartNextWave();

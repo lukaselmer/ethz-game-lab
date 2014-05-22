@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour {
 		if (Finished)
 			return;
 		if (SleepFor >= 0) {
-			SleepFor -= Time.deltaTime;
+			SleepFor -= TimeManager.GetDeltaTime();
 			if (SleepFor >= 0)
 				return;
 
@@ -66,11 +66,11 @@ public class Enemy : MonoBehaviour {
 			return;
 		}
 
-		//var movement = speed * Time.deltaTime * movementTowardsEnemy.normalized;
+		//var movement = speed * TimeManager.GetDeltaTime() * movementTowardsEnemy.normalized;
 		//gameObject.transform.Translate (movement);
 
 		gameObject.transform.LookAt (nextCheckpoint.Position);
-		gameObject.transform.Translate (Vector3.forward * Time.deltaTime * speed);
+		gameObject.transform.Translate (Vector3.forward * TimeManager.GetDeltaTime() * speed);
 
 	}
 	

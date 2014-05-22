@@ -16,8 +16,8 @@ public class Projectile : MonoBehaviour
 		if (target)
 			transform.LookAt (target);
 
-		transform.Translate (Vector3.forward * Time.deltaTime * mySpeed);
-		myDist += Time.deltaTime * mySpeed;
+		transform.Translate (Vector3.forward * TimeManager.GetDeltaTime() * mySpeed);
+		myDist += TimeManager.GetDeltaTime() * mySpeed;
 		if (myDist > myRange) {
 			Destroy (gameObject);
 		}
