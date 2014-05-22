@@ -27,7 +27,14 @@ public class GameLogic : MonoBehaviour {
 
 	public GameObject[] Carrots;
 
-    public static GameLogic I {
+	
+	public int RemainingWaves {
+		get {
+			return waveManager.RemainingWaves;
+		}
+	}
+	
+	public static GameLogic I {
         get {
             return FindObjectOfType<GameLogic>();
         }

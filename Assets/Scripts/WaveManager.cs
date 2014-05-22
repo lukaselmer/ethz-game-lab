@@ -22,6 +22,12 @@ namespace Game {
         private WaveConfig _waveConfig;
         private bool _waveRunning;
 
+		public int RemainingWaves {
+			get {
+				return waves.Count - currentWaveNumber;
+			}
+		}
+
         public WaveManager(GameLogic game, GameObject enemyPrefab, Maze maze, Transform enemyParent) {
             _waveConfig = new WaveConfig(game, enemyPrefab, maze, enemyParent);
 
