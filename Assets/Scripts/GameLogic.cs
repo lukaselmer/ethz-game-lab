@@ -25,6 +25,8 @@ public class GameLogic : MonoBehaviour {
 	public GameObject treePrefab;
 	public Transform treeParent;
 
+	public GameObject[] Carrots;
+
     public static GameLogic I {
         get {
             return FindObjectOfType<GameLogic>();
@@ -68,8 +70,11 @@ public class GameLogic : MonoBehaviour {
     public void Survived(Enemy enemy) {
         EnemiesSurvived += 1;
         Lives -= 1;
-        if (Lives < 0)
-            GameLost();
+		if (Lives < 0) {
+			GameLost ();
+			return;
+		}
+		Destroy (Carrots [Lives]);
     }
 
     public void Killed(Enemy enemy) {
