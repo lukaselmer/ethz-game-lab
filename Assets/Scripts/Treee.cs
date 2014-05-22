@@ -41,7 +41,7 @@ public class Treee : MonoBehaviour, Selectable {
 	
 	// Update is called once per frame
 	void Update () {
-		Root.Grow (Time.deltaTime * growFactor);
+		Root.Grow (TimeManager.GetDeltaTime() * growFactor);
 
 		targetController.transform.localScale = new Vector3 (Size+5, Size+5, Size+5);
 	
@@ -49,7 +49,7 @@ public class Treee : MonoBehaviour, Selectable {
 		
 		if (targetController.CurrentTarget) {
 			CalculateAimPosition (targetController.CurrentTarget.position);
-			this.transform.rotation = Quaternion.Lerp (this.transform.rotation, desiredRotation, Time.deltaTime * turnSpeed);
+			this.transform.rotation = Quaternion.Lerp (this.transform.rotation, desiredRotation, TimeManager.GetDeltaTime() * turnSpeed);
 		}
 		
 		if (Time.time >= nextFireTime) {

@@ -8,7 +8,7 @@ public class TreeTargetController : MonoBehaviour {
 	public Transform CurrentTarget { get; private set; }
 
 	void Update() {
-		transform.Rotate(new Vector3(0,1,0), Time.deltaTime*50);
+		transform.Rotate(new Vector3(0,1,0), TimeManager.GetDeltaTime()*50);
 	}
 
 	void OnTriggerEnter (Collider other)

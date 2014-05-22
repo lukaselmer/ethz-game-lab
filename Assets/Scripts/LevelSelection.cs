@@ -9,14 +9,16 @@ class LevelSelection {
 	}
 
 	public void LoadNextLevel () {
+		TimeManager.Speed1();
+
 		// TODO: refactor this
 		if(Application.loadedLevelName == "Spring")
 			Application.LoadLevel("Summer");
-		if(Application.loadedLevelName == "Summer")
+		else if(Application.loadedLevelName == "Summer")
 			Application.LoadLevel("Fall");
-		if(Application.loadedLevelName == "Fall")
+		else if(Application.loadedLevelName == "Fall")
 			Application.LoadLevel("Winter");
-		if(Application.loadedLevelName == "Winter")
+		else if(Application.loadedLevelName == "Winter")
 			Application.LoadLevel("Levels");
 	}
 

@@ -46,7 +46,7 @@ public class GameLogic : MonoBehaviour {
     }
 
     void Update() {
-        PlayTime += Time.deltaTime;
+        PlayTime += TimeManager.GetDeltaTime();
         waveManager.Update();
     }
 
@@ -96,7 +96,15 @@ public class GameLogic : MonoBehaviour {
 		int btnWidth = 200;
 		int btnHeight = 50;
 
-		
+		if (GUI.Button (new Rect (Screen.width - 160, 10, 32, 30), "▮▮"))
+			TimeManager.Pause();
+		if (GUI.Button (new Rect (Screen.width - 120, 10, 32, 30), "▶"))
+			TimeManager.Speed1();
+		if (GUI.Button (new Rect (Screen.width - 80, 10, 32, 30), "▶▶"))
+			TimeManager.Speed2();
+		if (GUI.Button (new Rect (Screen.width - 40, 10, 32, 30), "▶▶▶"))
+			TimeManager.Speed3();
+
 		if (GUI.Button (new Rect (230, 10, 100, 30), "Help"))
 			showHelp = !showHelp;
 
