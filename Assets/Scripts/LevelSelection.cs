@@ -5,6 +5,12 @@ using System;
 using System.Linq;
 
 class LevelSelection {
+	public static int UnlockedLevelID {
+		get {
+			return unlockedLevelID;
+		}
+	}
+
 	private static int unlockedLevelID = 1;
 	private static Dictionary<string, int> levelsNamesByID = new Dictionary<string, int> () {
 		{"Spring", 1}, {"Summer", 2}, {"Fall", 3}, {"Winter", 4}, {"Levels", 5} // TODO: replace Levels by Victory Scene
