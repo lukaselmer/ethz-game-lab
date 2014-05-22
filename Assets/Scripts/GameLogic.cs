@@ -70,7 +70,7 @@ public class GameLogic : MonoBehaviour {
     public void Survived(Enemy enemy) {
         EnemiesSurvived += 1;
         Lives -= 1;
-		if (Lives < 0) {
+		if (Lives <= 0) {
 			GameLost ();
 			return;
 		}
