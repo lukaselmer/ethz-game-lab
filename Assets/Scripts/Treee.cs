@@ -41,7 +41,7 @@ public class Treee : MonoBehaviour, Selectable {
 	
 	// Update is called once per frame
 	void Update () {
-		Root.Grow (TimeManager.GetDeltaTime() * growFactor);
+		Root.Grow (TimeManager.GetDeltaTime() * growFactor * GameLogic.I.GlobalGrowFactor);
 
 		targetController.transform.localScale = new Vector3 (Size+5, Size+5, Size+5);
 	

@@ -8,8 +8,8 @@ public class HUD : MonoBehaviour
 
 	void Update ()
 	{
-		guiPlayTime.text = string.Format ("Lives: {0}, Remaining Waves: {1}, Enemies killed: {2}, Play Time: {3:F0}", 
-		                                  GameLogic.I.Lives, GameLogic.I.RemainingWaves, GameLogic.I.EnemiesKilled, GameLogic.I.PlayTime);
+		guiPlayTime.text = string.Format ("Lives: {0}, Remaining Waves: {1}, Enemies killed: {2}, Play Time: {3:F0}, Mana: {4:F0}", 
+		                                  GameLogic.I.Lives, GameLogic.I.RemainingWaves, GameLogic.I.EnemiesKilled, GameLogic.I.PlayTime, GameLogic.I.Mana);
 
 		
 		if (InputHandler.I.Selected is Treee) {
