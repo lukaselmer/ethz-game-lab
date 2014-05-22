@@ -16,9 +16,9 @@ public class LevelSelect : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit, 1000, ClickableLayer)) {
 				
 				var selectedGameObject = hit.collider.gameObject.transform;
-				var level_name = selectedGameObject.name;
-				
-				Application.LoadLevel(level_name);
+				var levelName = selectedGameObject.name;
+
+				LevelSelection.LoadLevel(levelName);
 			}
 		}
 	}
