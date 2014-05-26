@@ -31,7 +31,7 @@ public class Wave {
 		enemies = new List<Enemy> ();
 
 		for (var i = 0; i < amount; ++i) {
-			var enemy = ObjectFactory.CreateSmallEnemy (waveConfig, speed, health, i / 2.0f);
+			var enemy = ObjectFactory.CreateSmallEnemy (waveConfig, speed, health, i * 0.8f);
 			enemies.Add (enemy);
 
 			/*var enemyObject = (GameObject)GameObject.Instantiate (enemyPrefab, start.Position, Quaternion.identity).GetComponent<Enemy> ();	
