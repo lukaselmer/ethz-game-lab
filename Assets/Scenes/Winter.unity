@@ -2936,7 +2936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a207e19efa3d84435b3cd82b8f12590b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 100002, guid: dc27aa107e02040a8b2337d74a829567, type: 2}
+  enemyPrefab: {fileID: 100002, guid: bfb6946bd7ffa427e8a393ff9b7edf21, type: 2}
   enemyParent: {fileID: 1679991753}
   checkpoints:
   - {fileID: 293780397}
