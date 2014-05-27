@@ -17,6 +17,8 @@ public class Branch : MonoBehaviour, Selectable {
 			size = value;
 		}
 	}
+
+	private int numBranches = 0;
 	
 	public float TotalSize {
 		get {
@@ -65,7 +67,7 @@ public class Branch : MonoBehaviour, Selectable {
 	public void Grow(float delta) {
 		
 		if (depth < tree.maxDepth) {
-			if (Size - (branches.Count*0.1f) > (1.0f - tree.numBranches*0.1f)) {
+			if (numBranches < tree.numBranches && Size - (numBranches*0.1f) > (1.0f - tree.numBranches*0.1f)) {
 				AddBranch();
 			}
 		}
@@ -79,6 +81,7 @@ public class Branch : MonoBehaviour, Selectable {
 	}
 	
 	private void AddBranch() {
+		numBranches++;
 		int sector = 360 / tree.numBranches;
 		int rotation = branches.Count * sector + (int)Random.Range (0, sector/1.5f);
 		
